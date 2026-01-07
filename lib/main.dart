@@ -1,4 +1,4 @@
-import 'package:alermtask/features/onboarding_screen.dart';
+import 'package:alermtask/features/onboard/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
