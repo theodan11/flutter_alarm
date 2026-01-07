@@ -25,6 +25,6 @@ Future<Position> getCurrentLocation() async {
 
     return await Geolocator.getCurrentPosition();
   } catch (error) {
-    return throw Exception("Location error");
+    return throw Exception("Location error: $error");
   }
 }

@@ -3,7 +3,7 @@ import 'package:alermtask/common_widgets/c_fill_button.dart';
 import 'package:alermtask/common_widgets/c_out_buttom.dart';
 import 'package:alermtask/constants/c_font_style.dart';
 import 'package:alermtask/constants/color_const.dart';
-import 'package:alermtask/features/home/home_screen.dart';
+import 'package:alermtask/features/home/screen/home_screen.dart';
 import 'package:alermtask/helpers/get_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
