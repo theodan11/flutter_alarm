@@ -1,3 +1,4 @@
+import 'package:alermtask/constants/c_font_style.dart';
 import 'package:flutter/material.dart';
 
 class OnboardPage extends StatelessWidget {
@@ -26,11 +27,7 @@ class OnboardPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               title,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 28,
-              ),
+              style:CFontStyle.poppins28w500,
               textAlign: TextAlign.left,
             ),
           ),
@@ -39,11 +36,7 @@ class OnboardPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               description,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
+              style: CFontStyle.oxygen14w400,
               textAlign: TextAlign.left,
             ),
           ),

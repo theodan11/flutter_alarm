@@ -1,4 +1,7 @@
 import 'package:alermtask/common_widgets/background_blur_container.dart';
+import 'package:alermtask/common_widgets/c_fill_button.dart';
+import 'package:alermtask/constants/color_const.dart';
+import 'package:alermtask/features/welcome/welcome_screen.dart';
 import 'package:alermtask/features/onboard/widgets/onboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -11,6 +14,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  int currentIndex = 0;
   final controller = PageController();
   @override
   void dispose() {
@@ -24,6 +28,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: BackgroundBlurContainer(
         childWidget: [
           PageView(
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
             controller: controller,
             children: [
               OnboardPage(
@@ -57,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Text(
                 "Skip",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorConst.whiteColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   fontFamily: 'Oxygen',
@@ -81,32 +90,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SizedBox(height: 34),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
+                  child: CFillButton(
+                    buttonText: "Next",
+                    ontap: () {
+                      if (currentIndex == 2) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                        );
+                      } else {
+                        controller.nextPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      }
                     },
-                    child: Container(
-                      height: 56,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF5200FF),
-                        borderRadius: BorderRadius.circular(69),
-                      ),
-
-                      child: Center(
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
                 Flexible(child: SizedBox(height: 70)),
@@ -115,8 +112,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ],
       ),
-
-    
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:alermtask/constants/color_const.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 class BackgroundBlurContainer extends StatelessWidget {
@@ -13,7 +14,7 @@ class BackgroundBlurContainer extends StatelessWidget {
         gradient: LinearGradient(
           begin: AlignmentGeometry.topCenter,
           end: AlignmentGeometry.bottomCenter,
-          colors: [Color(0xFF0B0024), Color(0xFF082257)],
+          colors: [...ColorConst.gradientColors],
         ),
       ),
 
@@ -25,7 +26,7 @@ class BackgroundBlurContainer extends StatelessWidget {
               width: 62,
               height: 62,
               decoration: BoxDecoration(
-                color: Color(0xFF5200FF),
+                color:ColorConst.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),
@@ -37,7 +38,7 @@ class BackgroundBlurContainer extends StatelessWidget {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                color: Color(0xFF5200FF),
+                color:ColorConst.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),
@@ -49,7 +50,7 @@ class BackgroundBlurContainer extends StatelessWidget {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                color: Color(0xFF5200FF),
+                color: ColorConst.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),
