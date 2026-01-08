@@ -1,16 +1,40 @@
-# alermtask
+# Alarm App Flutter
+A simple alarm app.
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Packages
+  - smooth_page_indicator
+  - shared_preferences
+  - google_fonts
+  - geolocator
+  - flutter_bloc
+  - equatable
+  - intl
+  - geocoding
+  - flutter_local_notifications
+  - timezone
+## Look into the app
+### Onboarding Screen
+<p align="center">
+  <img src="gitss/onboard_1.png" height="300" />
+  <img src="gitss/onboard_2.png" height="300" />
+  <img src="gitss/onboard_3.png" height="300" />
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+### Welcome Screen
+<p align="center">
+  <img src="gitss/welcome.png" height="300" />
+  <img src="gitss/location.png" height="300" />
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Alarm Screen
+<p align="center">
+  <img src="gitss/home_1.png" height="300" />
+  <img src="gitss/home_2.png" height="300" />
+  <img src="gitss/home_3.png" height="300" />
+  <img src="gitss/home_4.png" height="300" />
+  <img src="gitss/home_5.png" height="300" />
+  <img src="gitss/home_6.png" height="300" />
+</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
