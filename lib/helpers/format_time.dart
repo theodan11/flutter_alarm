@@ -19,3 +19,15 @@ String FormateTime(TimeOfDay time) {
   final formattedTime = DateFormat.jm().format(dateTime);
   return formattedTime;
 }
+
+DateTime combineDateTime(TimeOfDay time, DateTime date){
+
+  return  DateTime(
+    date.year,
+    date.month,
+    date.day,
+    time.hour,
+    time.minute
+  );
+
+}
