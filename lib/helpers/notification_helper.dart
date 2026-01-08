@@ -5,7 +5,9 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationHelper {
   static final _notification = FlutterLocalNotificationsPlugin();
 
-  static init() {
+  static  bool? granted;
+
+  static init() async {
     tz.initializeTimeZones();
     _notification.initialize(
       const InitializationSettings(
@@ -13,6 +15,12 @@ class NotificationHelper {
         iOS: DarwinInitializationSettings(),
       ),
     );
+
+   final androidPlugin = _notification
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+    granted = await androidPlugin?.requestExactAlarmsPermission();
   }
 
   static Future setAlarmOn({
@@ -27,14 +35,14 @@ class NotificationHelper {
           playSound: true,
           importance: Importance.high,
           priority: Priority.max,
-          sound: RawResourceAndroidNotificationSound('notification'),
+          // sound: RawResourceAndroidNotificationSound('notification'),
           fullScreenIntent: true,
         );
     NotificationDetails notificationDetails = NotificationDetails(
       android: androidNotificationDetails,
       iOS: DarwinNotificationDetails(presentSound: true),
     );
-    await _notification.zonedSchedule(
+    _notification.zonedSchedule(
       id,
       "Alarm",
       "Alarm is on",

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alermtask/features/home/cubit/alarm_state.dart';
 import 'package:alermtask/features/home/model/alarm_model.dart';
 import 'package:alermtask/helpers/format_time.dart';
@@ -8,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AlarmCubit extends Cubit<AlarmState> {
   AlarmCubit() : super(AlarmState(alarmList: []));
 
-  void addNewAlarm(TimeOfDay time, DateTime dateTime) {
+  void addNewAlarm(TimeOfDay time, DateTime dateTime)  {
     AlarmState alarmList = state;
-    int id = DateTime.now().millisecondsSinceEpoch;
+    int id = Random().nextInt(1000);
     final updatedList = List<AlarmModel>.from(state.alarmList);
     final combinedDateAndTime = combineDateTime(time, dateTime);
     updatedList.add(
@@ -26,19 +28,19 @@ class AlarmCubit extends Cubit<AlarmState> {
     emit(AlarmState(alarmList: updatedList));
   }
 
-  void toggleIsActive(int id, bool value) {
+  Future<void> toggleIsActive(int id, bool value) async {
     List<AlarmModel> alarmStateList = state.alarmList;
 
-    alarmStateList = alarmStateList.map((alarm) {
+    alarmStateList = alarmStateList.map( (alarm)  {
       if (alarm.id == id) {
         if (value) {
 
-          NotificationHelper.setAlarmOn(
+            NotificationHelper.setAlarmOn(
             id: alarm.id,
             dateTime: alarm.combinedDateTime,
           );
         } else {
-          NotificationHelper.cancelAlarm(id: alarm.id);
+           NotificationHelper.cancelAlarm(id: alarm.id);
 
         }
         return alarm.copyWith(isActive: value);
