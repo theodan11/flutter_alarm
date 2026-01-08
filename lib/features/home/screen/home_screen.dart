@@ -4,6 +4,7 @@ import 'package:alermtask/constants/color_const.dart';
 import 'package:alermtask/features/home/cubit/alarm_cubit.dart';
 import 'package:alermtask/features/home/cubit/alarm_state.dart';
 import 'package:alermtask/features/home/model/alarm_model.dart';
+import 'package:alermtask/helpers/format_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -103,13 +104,13 @@ class HomeScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(alarm.time.toString(), style: CFontStyle.poppins16w400),
+            Text(FormateTime(alarm.time), style: CFontStyle.poppins16w400),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                   alarm.dateTime.toString(),
+                   FormatDate(alarm.dateTime),
                     style: CFontStyle.poppins16w400.copyWith(
                       fontSize: 14,
                       color: ColorConst.gray27Color,

@@ -6,7 +6,7 @@ class AlarmState extends Equatable {
 
   const AlarmState({required this.alarmList});
 
-  // const AlarmState.copyWith()
+
 
   @override
   List<Object?> get props => [alarmList];
