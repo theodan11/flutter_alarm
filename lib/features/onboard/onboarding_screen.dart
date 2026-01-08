@@ -4,6 +4,7 @@ import 'package:alermtask/constants/color_const.dart';
 import 'package:alermtask/features/welcome/welcome_screen.dart';
 import 'package:alermtask/features/onboard/widgets/onboard_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -92,8 +93,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: CFillButton(
                     buttonText: "Next",
-                    ontap: () {
+                    ontap: ()async {
                       if (currentIndex == 2) {
+                        final pref = await SharedPreferences.getInstance();
+                        pref.setBool("onboardSeen", true);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => WelcomeScreen()),
                         );
