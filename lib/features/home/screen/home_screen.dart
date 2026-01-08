@@ -1,6 +1,8 @@
 import 'package:alermtask/common_widgets/background_blur_container.dart';
 import 'package:alermtask/constants/c_font_style.dart';
 import 'package:alermtask/constants/color_const.dart';
+import 'package:alermtask/features/common/location/cubit/location_cubit.dart';
+import 'package:alermtask/features/common/location/model/location_model.dart';
 import 'package:alermtask/features/home/cubit/alarm_cubit.dart';
 import 'package:alermtask/features/home/cubit/alarm_state.dart';
 import 'package:alermtask/features/home/model/alarm_model.dart';
@@ -37,10 +39,7 @@ class HomeScreen extends StatelessWidget {
                   lastDate: DateTime(2100),
                 );
                 if (date != null) {
-                  context.read<AlarmCubit>().addNewAlarm(
-                    time,
-                    date
-                  );
+                  context.read<AlarmCubit>().addNewAlarm(time, date);
                 }
               }
             },
@@ -73,7 +72,25 @@ class HomeScreen extends StatelessWidget {
                             // print(state.alarmList);
                             // print(state.alarmList.length);
                             AlarmModel alarm = state.alarmList[index];
-                            return _alarmToggleContainter(context, alarm);
+                            return Dismissible(
+                              key: ValueKey(alarm.id),
+                              direction: DismissDirection.endToStart,
+                              background: Container(
+                                alignment: Alignment.centerRight,
+                                padding: const EdgeInsets.only(right: 20),
+
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade700,
+                                borderRadius: BorderRadius.circular(69),
+                                ),
+                                // color: ColorConst.gray08Color,
+                                child: const Icon(Icons.delete, color: Colors.white),
+                              ),
+                              onDismissed: (_) => context
+                                  .read<AlarmCubit>()
+                                  .deleteAlarm(alarm.id),
+                              child: _alarmToggleContainter(context, alarm),
+                            );
                           },
                         );
                       },
@@ -110,13 +127,14 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                   FormatDate(alarm.dateTime),
+                    FormatDate(alarm.dateTime),
                     style: CFontStyle.poppins16w400.copyWith(
                       fontSize: 14,
                       color: ColorConst.gray27Color,
                     ),
                   ),
                   SizedBox(width: 8),
+
                   Switch(
                     inactiveThumbColor: ColorConst.primaryDarkColor,
                     inactiveTrackColor: ColorConst.whiteColor,
@@ -126,6 +144,11 @@ class HomeScreen extends StatelessWidget {
                     value: alarm.isActive,
                     onChanged: (value) {
                       // print(value);
+                      context.read<AlarmCubit>().toggleIsActive(
+                        alarm.id,
+                        value,
+                      );
+                      // print(alarm.isActive);
                     },
                   ),
                 ],
@@ -158,16 +181,23 @@ class HomeScreen extends StatelessWidget {
             ),
 
             Expanded(
-              child: TextField(
-                onChanged: (value) {
-                  // print(value);
+              child: BlocBuilder<LocationCubit, LocationModel>(
+                builder: (context, state) {
+                  return TextField(
+                    onChanged: (value) {
+                      // print(value);
+                    },
+                    style: TextStyle(color: ColorConst.whiteColor),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      // hintText: state.locationName != '' ? "Add your location" : state.locationName.toString(),
+                      hintText: state.locationName.isNotEmpty
+                          ? state.locationName
+                          : "Add you location",
+                      hintStyle: TextStyle(color: ColorConst.gray27Color),
+                    ),
+                  );
                 },
-                style: TextStyle(color: ColorConst.whiteColor),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Add your location",
-                  hintStyle: TextStyle(color: ColorConst.gray27Color),
-                ),
               ),
             ),
           ],

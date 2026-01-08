@@ -3,9 +3,12 @@ import 'package:alermtask/common_widgets/c_fill_button.dart';
 import 'package:alermtask/common_widgets/c_out_buttom.dart';
 import 'package:alermtask/constants/c_font_style.dart';
 import 'package:alermtask/constants/color_const.dart';
+import 'package:alermtask/features/common/location/cubit/location_cubit.dart';
 import 'package:alermtask/features/home/screen/home_screen.dart';
 import 'package:alermtask/helpers/get_location.dart';
+import 'package:alermtask/helpers/get_location_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -52,7 +55,12 @@ class WelcomeScreen extends StatelessWidget {
                   COutButtom(
                     ontap: ()async {
                       Position position =await getCurrentLocation();
+                      String locationName = await getLocationName(position.latitude, position.longitude);
                       print(position);
+                      print(locationName);
+
+                      context.read<LocationCubit>().updateLatLon(position.latitude, position.longitude);
+                      context.read<LocationCubit>().updateLocationName(locationName);
                     },
                     buttonText: "Use Current Location",
                     bIcon: Icons.location_on_outlined,

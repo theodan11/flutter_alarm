@@ -16,4 +16,28 @@ class AlarmCubit extends Cubit<AlarmState>{
     emit(AlarmState(alarmList: updatedList));
 
   }
+
+  void toggleIsActive(String id, bool value){
+    List<AlarmModel> alarmStateList = state.alarmList;
+
+    alarmStateList = alarmStateList.map((alarm){
+      if (alarm.id == id){
+        return alarm.copyWith(isActive:value);
+
+
+      }else{
+        return alarm;
+      }
+
+    }).toList();
+
+    emit(AlarmState(alarmList: alarmStateList));
+  }
+  
+  void deleteAlarm(String id){
+    List<AlarmModel> alarmStateList = state.alarmList;
+    alarmStateList = alarmStateList.where((alarm)=>alarm.id != id).toList();
+
+    emit(AlarmState(alarmList: alarmStateList));
+  }
 }

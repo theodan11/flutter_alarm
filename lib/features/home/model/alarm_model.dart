@@ -14,6 +14,15 @@ class AlarmModel extends Equatable {
     this.isActive = false,
   });
 
+  AlarmModel copyWith({TimeOfDay? time, DateTime? dateTime, bool? isActive}) {
+    return AlarmModel(
+      id: id,
+      time: time ?? this.time,
+      dateTime: dateTime ?? this.dateTime,
+      isActive: isActive ?? this.isActive
+    );
+  }
+
   @override
   List<Object?> get props => [id, time, dateTime, isActive];
 }

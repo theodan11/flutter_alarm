@@ -1,3 +1,4 @@
+import 'package:alermtask/features/common/location/cubit/location_cubit.dart';
 import 'package:alermtask/features/home/cubit/alarm_cubit.dart';
 import 'package:alermtask/features/onboard/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => AlarmCubit())],
+      providers: [
+        BlocProvider(create: (_) => AlarmCubit()),
+        BlocProvider(create: (_)=> LocationCubit()),
+      ],
       child: const MyApp(),
     ),
   );
