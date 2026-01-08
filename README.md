@@ -34,7 +34,7 @@ A simple alarm app.
   <img src="gitss/home_2.png" height="300" />
   <img src="gitss/home_3.png" height="300" />
   <img src="gitss/home_4.png" height="300" />
-  <img src="gitss/home_5.png" height="300" />
   <img src="gitss/home_6.png" height="300" />
+  <img src="gitss/home_5.png" height="300" />
 </p>
 
